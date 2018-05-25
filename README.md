@@ -26,7 +26,7 @@ If using anaconda, ffmpeg can be installed as follows:
 Penn Action:  
 * Download data:  
 Download from [Penn Action](https://dreamdragon.github.io/PennAction) and extract into ./datasets/PennAction/
-* Download estimated pose estimated using hourglass network:
+* Download pose estimated using hourglass network:
 ```
 ./datasets/PennAction/download_hourglass.sh
 ```
@@ -40,7 +40,7 @@ Download from [Human 3.6M](http://vision.imar.ro/human3.6m/description.php) into
 ```
 cdf2mat.m
 ```
-* Download estimated pose estimated using hourglass network:
+* Download pose estimated using hourglass network:
 ```
 ./datasets/Human3.6M/download_hourglass.sh
 ```
