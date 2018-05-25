@@ -79,11 +79,11 @@ Resulting images and videos will be located at:
 ## Human 3.6M training/testing
 Training LSTM (can run in parallel with image generator training):
 ```
-CUDA_VISIBLE_DEVICES=GPU_ID python lstm_src/train_det_rnn_penn.py --gpu=GPU_ID
+CUDA_VISIBLE_DEVICES=GPU_ID python lstm_src/train_det_rnn_h36m.py --gpu=GPU_ID
 ```
 Training Image Generator (can run in parallel with LSTM training):
 ```
-CUDA_VISIBLE_DEVICES=GPU_ID python imggen_src/train_penn.py --gpu=GPU_ID
+CUDA_VISIBLE_DEVICES=GPU_ID python imggen_src/train_h36m.py --gpu=GPU_ID
 ```
 Predict future pose from models trained with the above commands:
 ```
