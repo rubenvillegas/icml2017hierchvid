@@ -36,7 +36,7 @@ python ./datasets/PennAction/preprocess.py
 ```
 Human 3.6M:  
 * Download and convert:  
-Download from [Human 3.6M](http://vision.imar.ro/human3.6m/description.php) into ./datasets/Human3.6M/ and preprocess by first converting the pose CDF files using MATLAB and running the matlab script in ./datasets/Human3.6M/:
+Download from [Human 3.6M](http://vision.imar.ro/human3.6m/description.php) into ./datasets/Human3.6M/ and preprocess by first converting the pose CDF files into .mat using MATLAB and running the matlab script in ./datasets/Human3.6M/:
 ```
 cdf2mat.m
 ```
