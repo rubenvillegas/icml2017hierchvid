@@ -91,7 +91,7 @@ CUDA_VISIBLE_DEVICES=GPU_ID python lstm_src/test_det_rnn_h36m.py --gpu=GPU_ID --
 ```
 Predict video from networks trained with the above commands:
 ```
-CUDA_VISIBLE_DEVICES=2 python imggen_src/test_h36m.py --gpu=2 --imggen_prefix=HUMAN3.6M_ANALOGY_imgsize=128_layer=3_alpha=1.0_beta=1.0_gamma=1.0_lr=0.0001 --lstm_prefix=HUMAN3.6M_DET_LSTM_fskip=4_keep_prob=1.0_image_size=128_batch_size=256_lm_size=32_fut_step=32_num_layer=1_lstm_units=1024_seen_step=10_input_size=64_learning_rate=0.001
+CUDA_VISIBLE_DEVICES=GPU_ID python imggen_src/test_h36m.py --gpu=GPU_ID --imggen_prefix=HUMAN3.6M_ANALOGY_imgsize=128_layer=3_alpha=1.0_beta=1.0_gamma=1.0_lr=0.0001 --lstm_prefix=HUMAN3.6M_DET_LSTM_fskip=4_keep_prob=1.0_image_size=128_batch_size=256_lm_size=32_fut_step=32_num_layer=1_lstm_units=1024_seen_step=10_input_size=64_learning_rate=0.001
 ```
 Resulting images and videos will be located at:
 ```
