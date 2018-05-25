@@ -104,7 +104,7 @@ If you find this useful, please cite our work as follows:
 ```
 @inproceedings{villegas17hierchvid,
   title={{Learning to Generate Long-term Future via Hierarchical Prediction}},
-  author={Ruben Villegas and Yang, Jimei and Zou, Yuliang and Sohn, Sungryull and Lin, Xunyu and Lee, Honglak},
+  author={Villegas, Ruben and Yang, Jimei and Zou, Yuliang and Sohn, Sungryull and Lin, Xunyu and Lee, Honglak},
   booktitle=ICML,
   year={2017}
 }
