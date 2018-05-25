@@ -1,7 +1,6 @@
 import tensorflow as tf
 import numpy as np
 import os
-import ipdb
 
 from tensorflow.python.framework import dtypes
 from tensorflow.contrib import learn

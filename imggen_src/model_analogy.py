@@ -1,6 +1,5 @@
 import os
 import time
-import ipdb
 from glob import glob
 import tensorflow as tf
 

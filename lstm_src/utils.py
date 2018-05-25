@@ -1,6 +1,5 @@
 import random
 import math
-import ipdb
 import cv2
 import numpy as np
 import pylab as plt
