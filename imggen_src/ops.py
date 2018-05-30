@@ -259,37 +259,6 @@ def FixedUnPooling(x, shape, unpool_mat=None):
   return prod
 
 
-def gdl(gen_frames, gt_frames, alpha):
-  """
-    Calculates the sum of GDL losses between the predicted and ground truth frames.
-    @param gen_frames: The predicted frames at each scale.
-    @param gt_frames: The ground truth frames at each scale
-    @param alpha: The power to which each gradient term is raised.
-    @return: The GDL loss.
-    """
-  # create filters [-1, 1] and [[1],[-1]] for diffing to the left and down respectively.
-  pos = tf.constant(np.identity(3), dtype=tf.float32)
-  neg = -1 * pos
-  filter_x = tf.expand_dims(tf.pack([neg, pos]), 0)  # [-1, 1]
-  filter_y = tf.pack([tf.expand_dims(pos, 0),
-                      tf.expand_dims(neg, 0)])  # [[1],[-1]]
-  strides = [1, 1, 1, 1]  # stride of (1, 1)
-  padding = 'SAME'
-
-  gen_dx = tf.abs(tf.nn.conv2d(gen_frames, filter_x, strides, padding=padding))
-  gen_dy = tf.abs(tf.nn.conv2d(gen_frames, filter_y, strides, padding=padding))
-  gt_dx = tf.abs(tf.nn.conv2d(gt_frames, filter_x, strides, padding=padding))
-  gt_dy = tf.abs(tf.nn.conv2d(gt_frames, filter_y, strides, padding=padding))
-
-  grad_diff_x = tf.abs(gt_dx - gen_dx)
-  grad_diff_y = tf.abs(gt_dy - gen_dy)
-
-  gdl_loss = tf.reduce_mean((grad_diff_x**alpha + grad_diff_y**alpha))
-
-  # condense into one tensor and avg
-  return gdl_loss
-
-
 def linear(input_,
            output_size,
            name,
