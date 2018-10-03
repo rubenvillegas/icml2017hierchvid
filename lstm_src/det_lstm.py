@@ -47,10 +47,12 @@ class DET_LSTM(object):
     act_emb = None
     input_list = []
     input_list_enc = []
+    reuse_enc = False
     for t in range(self.seen_step):
       input_list.append(masked_seq[:, t, :])
       input_list_enc.append(relu(linear(
-          masked_seq[:, t, :], 32, name='lm_enc', reuse=tf.AUTO_REUSE)))
+          masked_seq[:, t, :], 32, name='lm_enc', reuse=reuse_enc)))
+      reuse_enc = True
 
     with tf.variable_scope('GEN'):
       with tf.variable_scope('G_LSTM'):
