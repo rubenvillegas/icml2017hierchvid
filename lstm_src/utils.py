@@ -28,7 +28,7 @@ def get_minibatches_idx(n,
         length = len([f for f in listdir(vid_path) if f.endswith('.png')])
         if length < min_frame:
           del_list.append(i)
-      print '[!] Discarded %d samples from training set!' % len(del_list)
+      print('[!] Discarded %d samples from training set!' % len(del_list))
     idx_list = np.delete(idx_list, del_list)
 
   if shuffle:
@@ -100,7 +100,7 @@ def visualize_lm(posex, posey, visib, vid_path, vid_imgs, stidx, t,
   posey = posey * img.shape[0]
   posex = posex * img.shape[1]
   cpose = np.zeros((img.shape[0], img.shape[1], 48))
-  for j in xrange(12):
+  for j in range(12):
     if visib[lines[j][0]] and visib[lines[j][1]] and \
        visib[lines[j][2]] and visib[lines[j][3]]:
       interp_x = np.linspace((posex[lines[j][0]] + posex[lines[j][1]]) / 2,
@@ -109,7 +109,7 @@ def visualize_lm(posex, posey, visib, vid_path, vid_imgs, stidx, t,
       interp_y = np.linspace((posey[lines[j][0]] + posey[lines[j][1]]) / 2,
                              (posey[lines[j][2]] + posey[lines[j][3]]) / 2, 4,
                              True)
-      for k in xrange(4):
+      for k in range(4):
         gmask = gauss2D_mask(
             (interp_y[k], interp_x[k]), img.shape[:2], sigma=8.)
         cpose[:, :, j * 4 + k] = gmask / gmask.max()
@@ -197,7 +197,7 @@ def save_test_result(save_path, idx, pred, pose, mask, stidx, seen_step,
   #system(cmd1);
   system(cmd2)
 
-  print '\t%d done.' % idx
+  print('\t%d done.' % idx)
 
 
 def save_test_result_all(save_path, idx, pred, pose, mask, stidx, seen_step,
@@ -257,7 +257,7 @@ def save_test_result_all(save_path, idx, pred, pose, mask, stidx, seen_step,
   #system(cmd1);
   system(cmd2)
 
-  print '\t%d done.' % idx
+  print('\t%d done.' % idx)
 
 
 def save_vid(line, pose_path, save_path, pad):
@@ -280,7 +280,7 @@ def save_vid(line, pose_path, save_path, pad):
     #  box[3]   = boxes[:,3].max()
     base_name = 'img_%s_%s.png' % (tokens[1].split('/')[-1], action[0])
     pre_pose, cur_pose, new_pose = None, None, None
-    for j in xrange(len(imgs)):
+    for j in range(len(imgs)):
       box = bboxes[j].round().astype('int32')
       img = cv2.imread(line.split()[0] + '/' + imgs[j])[:, :, ::-1]
       y1 = box[1] - pad
@@ -307,7 +307,7 @@ def save_vid(line, pose_path, save_path, pad):
       plt.imshow(patch)
       plt.axis('off')
       plt.tight_layout()
-      #    for k in xrange(cposey.shape[0]):
+      #    for k in range(cposey.shape[0]):
       #      if cvisib[k]:
       #        plt.plot(cposex[k],cposey[k], 'o')
       """if pre_pose is None:
@@ -316,7 +316,7 @@ def save_vid(line, pose_path, save_path, pad):
           cur_pose = pose[j]
           new_pose = np.zeros_like(cur_pose)
           match_list = range(pre_pose.shape[0])
-          for k in xrange(cur_pose.shape[0]):
+          for k in range(cur_pose.shape[0]):
             cur_pnt = cur_pose[k]
             min_dis = float('inf')
             min_idx = -1
@@ -332,7 +332,7 @@ def save_vid(line, pose_path, save_path, pad):
         pre_pose = new_pose"""
       new_pose = pose[j]
 
-      for k in xrange(new_pose.shape[0]):
+      for k in range(new_pose.shape[0]):
         plt.plot(new_pose[k, 0], new_pose[k, 1], 'o')
 
       plt.savefig(save_path + base_name + '_%05d.png' % j)
@@ -341,11 +341,11 @@ def save_vid(line, pose_path, save_path, pad):
          +base_name+'_%05d.png '+save_path+'img_%s_%s.gif'%(tokens[1].split('/')[-1], action[0])
     system(cmd1)
 
-    print '\t' + line.split()[0] + ' done.'
+    print('\t' + line.split()[0] + ' done.')
     res = 1
 
   except:
-    print '\t' + line.split()[0] + ' done.'
+    print('\t' + line.split()[0] + ' done.')
   return res
 
 

@@ -186,7 +186,7 @@ def main(gpu, image_size, batch_size, num_layer, lstm_units, seen_step,
                 sample = visualize_lm(posex, posey, image_size)
                 sample = sample.reshape((1, image_size, image_size))
 
-                samples = sample if samples == None else np.concatenate(
+                samples = sample if samples is None else np.concatenate(
                     [samples, sample], axis=0)
 
             if not os.path.exists(samples_dir):

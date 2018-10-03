@@ -46,18 +46,21 @@ class DET_LSTM(object):
 
     act_emb = None
     input_list = []
-    for t in xrange(self.seen_step):
+    input_list_enc = []
+    for t in range(self.seen_step):
       input_list.append(masked_seq[:, t, :])
+      input_list_enc.append(relu(linear(
+          masked_seq[:, t, :], 32, name='lm_enc', reuse=tf.AUTO_REUSE)))
 
     with tf.variable_scope('GEN'):
       with tf.variable_scope('G_LSTM'):
         enc_out, states = tf.contrib.rnn.static_rnn(
-            stacked_lstm, input_list, dtype=dtypes.float32)
+            stacked_lstm, input_list_enc, dtype=dtypes.float32)
 
     reuse_lstm = True
     reuse_output = False
     output_list = input_list
-    empty_input = tf.zeros([batch_size, input_size])
+    empty_input = tf.zeros_like(input_list_enc[-1])
 
     with tf.variable_scope('GEN'):
       for t in range(fut_step):
@@ -81,8 +84,7 @@ class DET_LSTM(object):
       self.g_sum = tf.summary.merge([loss_sum])
       self.writer = tf.summary.FileWriter(logs_dir, tf.get_default_graph())
 
-      self.t_vars = tf.trainable_variables()
-      self.g_vars = [var for var in self.t_vars if 'GEN' in var.name]
+      self.g_vars = tf.trainable_variables()
 
       self.global_step = tf.Variable(0, trainable=False)
       optimizer = tf.train.RMSPropOptimizer(
@@ -98,7 +100,7 @@ class DET_LSTM(object):
       num_param = 0
       for var in self.g_vars:
         num_param += int(np.prod(var.get_shape()))
-      print 'NUMBER OF PARAMETERS: ' + str(num_param)
+      print('NUMBER OF PARAMETERS: ' + str(num_param))
     self.saver = tf.train.Saver()
 
   def decoder(self, input_, reuse=False, name='decoder'):
